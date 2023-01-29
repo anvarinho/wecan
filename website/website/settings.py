@@ -51,6 +51,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'website.urls'
+AUTH_USER_MODEL = 'app.User'
 
 TEMPLATES = [
     {
