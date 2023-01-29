@@ -443,8 +443,8 @@ section{
 }
 
 .blogs .box-container .box {
-    border: 1px solid var(--black);
-    box-shadow: 5px 10px 5px #aaa;
+    border-radius: 1rem;
+    box-shadow: 5px 5px 5px #aaa;
     transition: all .6s ease;
 }
 
@@ -469,6 +469,7 @@ section{
 }
 
 .blogs .box-container .box .content{
+    border-radius: 1rem;
     padding:2rem;
     background: #fff;
 }
