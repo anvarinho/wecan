@@ -5,10 +5,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>WeCan.kg-Платформа поиска исполнителей</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    {% comment %} <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" /> {% endcomment %}
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
 </head>
 <body>
-    <h1>Hello world!!!!!!!</h1>
+    
+<!-- header section starts  -->
+
+{% include 'navbar.html' %}
+
+<!-- header section ends -->
+
+{% block content %}{% endblock content %}
+
+<!-- footer section starts  -->
+{% include 'footer.html' %}
+<!-- footer section ends -->
+
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<!-- custom js file links  -->
+<script src="{% static 'js/script.js' %}"></script>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init({
+      delay:400,
+      duration:800
+  });
+</script>
+
 </body>
 </html>
