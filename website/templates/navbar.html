@@ -4,7 +4,7 @@
     <nav class="navbar">
         <a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">Главная</a>
         <a href="{% url 'tasks' %}" class="{% if request.path == '/tasks/' %}active{% endif %}">Задания</a>
-        <a href="{% url 'stuff' %}" class="{% if request.path == '/stuff/' %}active{% endif %}">Исполнители</a>
+        <a href="{% url 'stuff' %}" class="{% if request.path == '/staff/' %}active{% endif %}">Исполнители</a>
         {% if request.user.is_authenticated %}
             <a href="{% url 'logout' %}" >Выйти</a>
         {% else %}
