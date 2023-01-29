@@ -308,6 +308,7 @@ section{
 }
 
 .about{
+    height: 100vh;
     background: url(../image/about-bt.jpg) no-repeat;
     background-position: center;
     background-size: cover;
@@ -638,6 +639,7 @@ footer{
 .promo {
     /* height: 100vh;
  *     background: url('../img/bg/yellow-tools-frame-with-copy-space1.jpg') center center/cover no-repeat; */
+    height: 100vh;
     background: url('../img/bg/yellow-tools-frame-with-copy-space1.jpg') no-repeat rgba(0,0,0,.1);
     background-position: center;
     background-attachment: fixed;
@@ -646,7 +648,6 @@ footer{
     justify-content: center;
     align-items: center;
     display: flex;
-    height: 100vh;
 }
 
 .container{
