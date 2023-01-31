@@ -14,8 +14,8 @@
                     <p> <span> В сервисе: </span> {{user.registered}} </p>
                 </div>
                 <div class="box">
-                    <p> <span> Cпециализация: </span></p>
                     {% if user.crafts.count > 0 %}
+                    <p> <span> Cпециализация: </span></p>
                     {% for craft in user.crafts %}
                     <p> <span> {{craft.name}}</span></p>
                     {% endfor %}
