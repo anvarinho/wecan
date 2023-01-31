@@ -1122,6 +1122,10 @@ footer{
     color: #fff;
 }
 
+.btn-become button{
+    width: 12rem;
+}
+
 .tasks h1{
     padding: 2rem;
     font-size: 2.5rem;
