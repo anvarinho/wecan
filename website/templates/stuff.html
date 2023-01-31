@@ -13,7 +13,7 @@
         {% for user in stuff %}
         <a class="team__member" href="{% url 'profile' user.id %}">
             <div class="team__member-image">
-                <img src="/static/{{user.avatar.url}}" alt="{{user.avatar.url}}"/>
+                <img src="{{user.avatar.url}}" alt="{{user.avatar.url}}"/>
             </div>
             <div class="team__member-info">
                 <h4>{{user.first_name}} {{user.last_name|make_list|first}}.</h4>
