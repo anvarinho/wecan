@@ -17,6 +17,12 @@ class UserForm(ModelForm):
     class Meta:
         model = User
         fields = ['avatar','first_name','last_name', 'email', 'bio']
+        labels = {
+            'avatar': 'Фото',
+            'last_name': 'Фамилия',
+            'first_name': 'Имя',
+            'bio': 'О себе'
+        }
 
 class LoginForm(ModelForm):
     class Meta:
