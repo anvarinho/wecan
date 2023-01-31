@@ -17,9 +17,6 @@
             </div>
             <div class="team__member-info">
                 <h4>{{user.first_name}} {{user.last_name|make_list|first}}.</h4>
-                {% for craft in user.crafts.all %}
-                <p>{{craft}}.</p>
-                {% endfor %}
             </div>
         </a>
         {% endfor %}
