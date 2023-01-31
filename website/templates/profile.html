@@ -22,7 +22,7 @@
                     {% endif %}
                 </div>
             </div>
-            <a href="#" class="btn">Редактировать</a>
+            <a href="{% url 'update-user' %}" class="btn">Редактировать</a>
         </div>
     </div>
     {% if active_tasks.count > 0 %}
