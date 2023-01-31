@@ -2,14 +2,16 @@
 {% block content %}
 {% load static %}
 <section class="tasks" style="min-height: 100vh; margin-top: 5rem;">
+    {% if request.user.is_staff == False %}
     <div class="btn-become">
         <h1>Вы можете стать исполнителем сервиса и зарабатывать</h1>
         <button>Стать исполнителем</button>
     </div>
+    {% endif %}
     <h1 style="padding: 3rem; font-size: 3rem;">Исполнители</h1>
     <div class="team__container">
         {% for user in stuff %}
-        <article class="team__member">
+        <a class="team__member" href="{% url 'profile' user.id %}">
             <div class="team__member-image">
                 <img src="/static/{{user.avatar.url}}" alt="{{user.avatar.url}}"/>
             </div>
@@ -19,7 +21,7 @@
                 <p>{{craft}}.</p>
                 {% endfor %}
             </div>
-        </article>
+        </a>
         {% endfor %}
     </div>
 </section>

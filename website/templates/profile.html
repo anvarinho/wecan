@@ -14,9 +14,10 @@
                     <p> <span> В сервисе: </span> {{user.registered}} </p>
                 </div>
                 <div class="box">
+                    <p> <span> Cпециализация: </span></p>
                     {% if user.crafts.count > 0 %}
                     {% for craft in user.crafts %}
-                    <p> <span> language : </span> hindi / english </p>
+                    <p> <span> {{craft.name}}</span></p>
                     {% endfor %}
                     {% endif %}
                 </div>

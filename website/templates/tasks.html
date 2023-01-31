@@ -2,11 +2,13 @@
 {% block content %}
 {% load static %}
 <section class="tasks" style=" margin-top: 5rem;">
+    {% if request.user.is_staff == False %}
     <div class="btn-become">
         <h1>Вы можете стать исполнителем сервиса и зарабатывать</h1>
         <button>Стать исполнителем</button>
     </div>
-    <h1 style="padding: 3rem; font-size: 3rem;">Все задания</h1>
+    {% endif %}
+    <h1 style="padding: 3rem; font-size: 3rem;">Новые задания</h1>
     <div class="faqs__container">
       {% for task in tasks %}
       <article class="faq">
@@ -15,7 +17,6 @@
         </div>
         <div class="question__answer">
             <div class="hidden"><h5 class="description">{{task.description}}</h5></div>
-            <div class="hidden"><h5>Адрес: {{task.address}}</h5></div>
             <div class="hidden"><h5>Время заказа: {{task.time}}</h5></div>
             <div class="hidden"><h5>Стоимость заказа: {{task.price}}</h5></div>
             <div class="hidden"><h5>Откликов: {{task.offer_set.all.count}}</h5></div>
