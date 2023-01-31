@@ -881,8 +881,9 @@ footer{
 
 .team__member-image img {
     filter: saturate(1);
-    width: 100vw;
-    height: 100vw;
+    object-fit: cover;
+    width: 100%;
+    aspect-ratio: 1/1;
 }
 
 .team__member:hover img {
