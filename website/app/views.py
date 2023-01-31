@@ -130,3 +130,15 @@ def loadList(request):
     category_id = request.GET.get('category')
     subcategories = Subcategory.objects.filter(category_id=category_id)
     return render(request,template_name,{'subcategories':subcategories, 'category_id': category_id})
+
+
+@login_required(login_url='login')
+def updateUser(request):
+    user = request.user
+    form = UserForm(instance=user)
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile', pk=user.id)
+    return render(request, 'update-user.html', {'form': form})
