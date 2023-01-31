@@ -1,0 +1,128 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+<section class="profile" id="profile">
+    <div class="row">
+        <div class="image">
+            <img class="tilt" src="{% static 'avatar.jpg' %}" alt="">
+        </div>
+        <div class="content">
+            <h3><span>{{user.name}}</span></h3>
+            <p class="info">Обо мне: {{user.bio}}</p>
+            <div class="box-container">
+                <div class="box">
+                    <p> <span> В сервисе: </span> {{user.registered}} </p>
+                </div>
+                <div class="box">
+                    {% if user.crafts.count > 0 %}
+                    {% for craft in user.crafts %}
+                    <p> <span> language : </span> hindi / english </p>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <a href="#" class="btn">Редактировать</a>
+        </div>
+    </div>
+    {% if active_tasks.count > 0 %}
+    <h1 style="padding: 3rem; font-size: 3rem;">Принятые задания: {{active_tasks.count}}</h1>
+    <div class="faqs__container">
+      {% for task in active_tasks %}
+      <article class="faq">
+        <div class="visible"><h4>{{task.subcategory.name}}</h4>
+            <p style="{% if task.is_done %}background: red;{% elif task.is_taken %}background: yellow; color: black;{% endif %}">{{task.timesince}} назад</p>
+        </div>
+        <div class="question__answer">
+            <div class="hidden"><h5 class="description">{{task.description}}</h5></div>
+            <div class="hidden"><h5>Время заказа: {{task.time}}</h5></div>
+            <div class="hidden"><h5>Стоимость заказа: {{task.price}}</h5></div>
+            <div class="hidden"><h5>Откликов: {{task.offer_set.all.count}}</h5></div>
+            <div class="hidden">
+                <div class="visible">
+                    {% if user == task.client %}
+                    <a href="{% url 'task' task.id %}" class="receive-btn">Посмотреть отклики</a>
+                    {% elif user.is_staff %}
+                    <a href="{% url 'makeoffer' task.id %}" class="receive-btn">Oткликнуться</a>
+                    {% else %}
+                    <a href="#" class="receive-btn" style="background: #aaa;">Стать исполнителем</a>
+                    {% endif %}
+                    <h6>{{task.client.name}}.</h6>
+                </div>
+            </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if ended_tasks.count > 0 %}
+    <h1 style="padding: 3rem; font-size: 3rem;">Завершённые задания: {{ended_tasks.count}}</h1>
+    <div class="faqs__container">
+        {% for task in ended_tasks %}
+        <article class="faq">
+          <div class="visible"><h4>{{task.subcategory.name}}</h4>
+              <p style="{% if task.is_done %}background: red;{% elif task.is_taken %}background: yellow; color: black;{% endif %}">{{task.timesince}} назад</p>
+          </div>
+          <div class="question__answer">
+              <div class="hidden"><h5 class="description">{{task.description}}</h5></div>
+              <div class="hidden"><h5>Время заказа: {{task.time}}</h5></div>
+              <div class="hidden"><h5>Стоимость заказа: {{task.price}}</h5></div>
+              <div class="hidden"><h5>Откликов: {{task.offer_set.all.count}}</h5></div>
+              <div class="hidden">
+                  <div class="visible">
+                      {% if user == task.client %}
+                      <a href="{% url 'task' task.id %}" class="receive-btn">Посмотреть отклики</a>
+                      {% elif user.is_staff %}
+                      <a href="{% url 'makeoffer' task.id %}" class="receive-btn">Oткликнуться</a>
+                      {% else %}
+                      <a href="#" class="receive-btn" style="background: #aaa;">Стать исполнителем</a>
+                      {% endif %}
+                      <h6>{{task.client.name}}.</h6>
+                  </div>
+              </div>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if my_tasks.count > 0 %}
+      <h1 style="padding: 3rem; font-size: 3rem;">Мои задания: {{my_tasks.count}}</h1>
+      <div class="faqs__container">
+        {% for task in my_tasks %}
+        <article class="faq">
+          <div class="visible"><h4>{{task.subcategory.name}}</h4>
+              <p style="{% if task.is_done %}background: red;{% elif task.is_taken %}background: yellow; color: black;{% endif %}">{{task.timesince}} назад</p>
+          </div>
+          <div class="question__answer">
+              <div class="hidden"><h5 class="description">{{task.description}}</h5></div>
+              <div class="hidden"><h5>Время заказа: {{task.time}}</h5></div>
+              <div class="hidden"><h5>Стоимость заказа: {{task.price}}</h5></div>
+              <div class="hidden"><h5>Откликов: {{task.offer_set.all.count}}</h5></div>
+              <div class="hidden">
+                  <div class="visible">
+                      {% if user == task.client %}
+                      <a href="{% url 'task' task.id %}" class="receive-btn">Посмотреть отклики</a>
+                      {% elif user.is_staff %}
+                      <a href="{% url 'makeoffer' task.id %}" class="receive-btn">Oткликнуться</a>
+                      {% else %}
+                      <a href="#" class="receive-btn" style="background: #aaa;">Стать исполнителем</a>
+                      {% endif %}
+                      <h6>{{task.client.name}}.</h6>
+                  </div>
+              </div>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+      {% endif %}
+    <script>
+        const faqs = document.querySelectorAll('.faq')
+        faqs.forEach(faq => {
+            faq.addEventListener('click', () => {
+                faq.classList.toggle('open')
+            })
+        })
+    </script>
+</section>
+{% include 'benefits.html' %}
+{% endblock content %}

@@ -60,13 +60,21 @@ def makeoffer(request, pk):
 def main(request):
     return render(request, 'main.html')
 
+def profile(request, pk):
+    user = User.objects.get(id=pk)
+    ended_tasks = Task.objects.filter(executor=user, is_done=True)
+    active_tasks = Task.objects.filter(executor=user, is_done=False)
+    my_tasks = Task.objects.filter(client=user, is_done=True)
+    context = {'user': user, 'ended_tasks': ended_tasks, 'active_tasks': active_tasks, 'my_tasks': my_tasks}
+    return render(request, 'profile.html', context)
+
 def stuff(request):
     stuff = User.objects.all()
     context = {'stuff': stuff}
     return render(request, 'stuff.html', context)
 
 def tasks(request):
-    tasks = Task.objects.all().order_by('-created')
+    tasks = Task.objects.filter(is_taken=False, is_done=False).all().order_by('-created')
     context = {'tasks': tasks}
     return render(request, 'tasks.html', context)
 
