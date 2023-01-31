@@ -22,6 +22,8 @@ def create(request):
             client=user,
             category=category,
             subcategory=subcategory,
+            price=request.POST.get('price'),
+            time=request.POST.get('time'),
             description=request.POST.get('description'),
         )
         return redirect('tasks')
