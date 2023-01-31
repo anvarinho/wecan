@@ -22,6 +22,7 @@ def create(request):
             client=user,
             category=category,
             subcategory=subcategory,
+            address=request.POST.get('address'),
             price=request.POST.get('price'),
             time=request.POST.get('time'),
             description=request.POST.get('description'),
