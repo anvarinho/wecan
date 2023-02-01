@@ -4,7 +4,7 @@
 <section class="profile" id="profile">
     <div class="row">
         <div class="image">
-            {% if user.avatar.url != 'avatar.png' %}
+            {% if user.avatar.url != '/avatar.png' %}
             <img class="tilt" src="{{user.avatar.url}}" alt="">
             {% else %}
             <img class="tilt" src="{% static 'static/avatars/avatar.png' %}" alt="">

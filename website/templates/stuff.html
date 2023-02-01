@@ -13,7 +13,7 @@
         {% for user in stuff %}
         <a class="team__member" href="{% url 'profile' user.id %}">
             <div class="team__member-image">
-                {% if user.avatar.url != 'avatar.png' %}
+                {% if user.avatar.url != '/avatar.png' %}
                 <img src="{{user.avatar.url}}" alt="{{user.avatar.url}}"/>
                 {% else %}
                 <img src="{% static 'static/avatars/avatar.png' %}" alt="{{user.avatar.url}}"/>
