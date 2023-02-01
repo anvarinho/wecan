@@ -4,7 +4,11 @@
 <section class="profile" id="profile">
     <div class="row">
         <div class="image">
+            {% if user.avatar.url != 'avatar.png' %}
             <img class="tilt" src="{{user.avatar.url}}" alt="">
+            {% else %}
+            <img class="tilt" src="{% static 'static/avatars/avatar.png' %}" alt="">
+            {% endif %}
         </div>
         <div class="content">
             <h3><span>{{user.name}}</span></h3>
