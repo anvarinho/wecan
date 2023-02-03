@@ -46,12 +46,10 @@
             <div class="hidden"><h5>Откликов: {{task.offer_set.all.count}}</h5></div>
             <div class="hidden">
                 <div class="visible">
-                    {% if user == task.client %}
-                    <a href="{% url 'task' task.id %}" class="receive-btn">Посмотреть отклики</a>
-                    {% elif user.is_staff %}
-                    <a href="{% url 'makeoffer' task.id %}" class="receive-btn">Oткликнуться</a>
-                    {% else %}
-                    <a href="#" class="receive-btn" style="background: #aaa;">Стать исполнителем</a>
+                    {% if request.user == task.client %}
+                    <a href="tel:{{task.executor.username}}" class="receive-btn">Позвонить</a>
+                    {% elif request.user == task.executor %}
+                    <a href="tel:{{task.client.username}}" class="receive-btn">Позвонить</a>
                     {% endif %}
                     <h6>{{task.client.name}}.</h6>
                 </div>
@@ -77,13 +75,6 @@
               <div class="hidden"><h5>Откликов: {{task.offer_set.all.count}}</h5></div>
               <div class="hidden">
                   <div class="visible">
-                      {% if user == task.client %}
-                      <a href="{% url 'task' task.id %}" class="receive-btn">Посмотреть отклики</a>
-                      {% elif user.is_staff %}
-                      <a href="{% url 'makeoffer' task.id %}" class="receive-btn">Oткликнуться</a>
-                      {% else %}
-                      <a href="#" class="receive-btn" style="background: #aaa;">Стать исполнителем</a>
-                      {% endif %}
                       <h6>{{task.client.name}}.</h6>
                   </div>
               </div>
@@ -107,13 +98,11 @@
               <div class="hidden"><h5>Откликов: {{task.offer_set.all.count}}</h5></div>
               <div class="hidden">
                   <div class="visible">
-                      {% if user == task.client %}
-                      <a href="{% url 'task' task.id %}" class="receive-btn">Посмотреть отклики</a>
-                      {% elif user.is_staff %}
-                      <a href="{% url 'makeoffer' task.id %}" class="receive-btn">Oткликнуться</a>
-                      {% else %}
-                      <a href="#" class="receive-btn" style="background: #aaa;">Стать исполнителем</a>
-                      {% endif %}
+                    {% if request.user == task.client and task.is_done %}
+                    <a href="{% url 'task' task.id %}" class="receive-btn">Оценить</a>
+                    {% elif request.user == task.client %}
+                    <a href="tel:{{task.executor.username}}" class="receive-btn">Позвонить</a>
+                    {% endif %}
                       <h6>{{task.client.name}}.</h6>
                   </div>
               </div>
