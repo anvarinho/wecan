@@ -16,4 +16,4 @@ class TaskSerializer(ModelSerializer):
     subcategory = SubcategorySerializer(many=False, read_only=True)
     class Meta:
         model = Task
-        fields = ['id', 'created', 'client', 'subcategory', 'description']
+        fields = ['id', 'timesince', 'client', 'subcategory', 'description']
