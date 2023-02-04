@@ -16,7 +16,7 @@
                 {% if user.avatar.url != '/avatar.png' %}
                 <img src="{{user.avatar.url}}" alt="{{user.avatar.url}}"/>
                 {% else %}
-                <img src="{% static 'static/avatars/avatar.png' %}" alt="{{user.avatar.url}}"/>
+                <img src="{% static 'avatars/avatar.png' %}" alt="{{user.avatar.url}}"/>
                 {% endif %}
             </div>
             <div class="team__member-info">
