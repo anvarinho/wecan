@@ -20,7 +20,7 @@ def getRoutes(request):
 @api_view(['GET', 'POST'])
 def getTasks(request):
     if request.method == 'GET':
-        regions = Task.objects.all()
+        regions = Task.objects.order_by('-created')
         serializer = TaskSerializer(regions, many=True)
         return Response(serializer.data)
     # if request.method == 'POST':
