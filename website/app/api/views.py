@@ -73,11 +73,8 @@ class loginView(GenericAPIView):
     serializer_class = LoginSerializer
     def post(self, request):
         data = request.data
-        print(data)
-        username = str(data.get('username', ''))
-        print(username)
+        username = data.get('username', '')
         password = data.get('password', '')
-        print(password)
         user = auth.authenticate(username=username, password=password)
         print(user)
         if user:

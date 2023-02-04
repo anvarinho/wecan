@@ -5,9 +5,9 @@
     <div class="row">
         <div class="image">
             {% if user.avatar.url != '/avatar.png' %}
-            <img class="tilt" src="{{user.avatar.url}}" alt="">
+            <img class="tilt" src="{{user.avatar.url}}" alt="{{user.avatar.url}}">
             {% else %}
-            <img class="tilt" src="{% static 'static/avatars/avatar.png' %}" alt="">
+            <img class="tilt" src="{% static 'avatars/avatar.png' %}" alt="avatar.png">
             {% endif %}
         </div>
         <div class="content">
