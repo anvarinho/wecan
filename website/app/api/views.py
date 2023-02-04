@@ -6,6 +6,12 @@ from django.http.response import JsonResponse
 from app.models import Task
 from rest_framework import status
 from django.db.models import Count
+from django.db.models import Count
+from django.conf import settings
+from django.contrib import auth
+from django.contrib.auth import authenticate, login
+from .serializers import UserSerializer, LoginSerializer, CreateUserSerializer
+import jwt
 # Create your views here.
 
 @api_view(['GET', 'POST', 'PUT'])
@@ -52,85 +58,32 @@ def getTask(request, pk):
         task.delete()
         return JsonResponse(status=status.HTTP_204_NO_CONTENT)
 
-# @api_view(['GET', 'POST'])
-# def image_list(request):
-#     """
-#     Get list of data or create new ones
-#     """
-#     if request.method == 'GET':
-#         images = ImageModel.objects.all()
-#         message = request.query_params.get('message', None)
-#         if message is not None:
-#             images = images.filter(message__icontains=message)
-#         serializer = ImageSerializer(images, many=True)
-#         return JsonResponse(serializer.data, safe=False)
- 
-#     elif request.method == 'POST':
-#         form = ImageForm(data=request.POST, files=request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return JsonResponse(form.data, status=status.HTTP_201_CREATED) 
-#         return JsonResponse(form.errors, status=status.HTTP_400_BAD_REQUEST)
+class registerView(GenericAPIView):
+    serializer_class = CreateUserSerializer
+    def post(self, request):
+        serializer = CreateUserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# @api_view(['GET', 'PUT', 'DELETE'])
-# def image_detail(request, pk):
-#     """
-#     Retrieve, update or delete a code snippet.
-#     """
-#     try:
-#         image = ImageModel.objects.get(pk=pk)
-#     except ImageModel.DoesNotExist:
-#         return JsonResponse(status=status.HTTP_404_NOT_FOUND)
 
-#     if request.method == 'GET':
-#         serializer = ImageSerializer(image)
-#         return JsonResponse(serializer.data)
-
-#     elif request.method == 'PUT':
-#         serializer = ImageSerializer(image, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return JsonResponse(serializer.data)
-#         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-#     elif request.method == 'DELETE':
-#         image.delete()
-#         return JsonResponse(status=status.HTTP_204_NO_CONTENT)
-
-# @api_view(['GET', 'POST', 'PUT'])
-# def getRoutes(request):
-#     routes = [
-#         'GET /api',
-#         'GET /api/tasks',
-#         'GET /api/tasks/:id',
-#         # 'GET /api/tours',
-#         # 'GET /api/tours/:id',
-#     ]
-#     return Response(routes)
-
-# @api_view(['GET'])
-# def getPlaces(request):
-#     rooms=Place.objects.all().annotate(q_places=Count('places')).order_by('-q_places')
-#     q = request.query_params.get('q', None)
-#     if q is not None:
-#         rooms = rooms.filter(name__icontains=q)
-#     serializer = PlaceSerializer(rooms, many=True)
-#     return Response(serializer.data)
-
-# @api_view(['GET'])
-# def getPlace(request, pk):
-#     room=Place.objects.get(id=pk)
-#     serializer = PlaceSerializer(room, many=False)
-#     return Response(serializer.data)
-
-# @api_view(['GET'])
-# def getTours(request):
-#     rooms=Tour.objects.all()
-#     serializer = TourSerializer(rooms, many=True)
-#     return Response(serializer.data)
-
-# @api_view(['GET'])
-# def getTour(request, pk):
-#     room=Tour.objects.get(id=pk)
-#     serializer = TourSerializer(room, many=False)
-#     return Response(serializer.data)
+class loginView(GenericAPIView):
+    serializer_class = LoginSerializer
+    def post(self, request):
+        data = request.data
+        print(data)
+        username = str(data.get('username', ''))
+        print(username)
+        password = data.get('password', '')
+        print(password)
+        user = auth.authenticate(username=username, password=password)
+        print(user)
+        if user:
+            key='JWT_SECRET_KEY'
+            auth_token = jwt.encode ({'user':"payload"}, key, algorithm="HS256")
+            serializer = UserSerializer(user)
+            data={'user':serializer.data, 'token':auth_token}
+            return Response(data, status=status.HTTP_200_OK)
+            # SEND RES
+        return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
