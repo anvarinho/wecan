@@ -4,7 +4,7 @@ from rest_framework.generics import GenericAPIView
 from django.shortcuts import render
 from .serializers import TaskSerializer
 from django.http.response import JsonResponse
-from app.models import Task
+from app.models import Task, User
 from rest_framework import status
 from django.db.models import Count
 from django.db.models import Count

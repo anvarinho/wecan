@@ -23,7 +23,7 @@ class TaskSerializer(ModelSerializer):
     subcategory = SubcategorySerializer(many=False, read_only=True)
     class Meta:
         model = Task
-        fields = ['id', 'timesince', 'client', 'subcategory', 'description']
+        fields = ['id', 'timesince', 'client', 'subcategory', 'description', 'is_taken', 'is_done']
 
 class CreateUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
