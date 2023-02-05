@@ -4,7 +4,7 @@ from rest_framework.generics import GenericAPIView
 from django.shortcuts import render
 from .serializers import TaskSerializer
 from django.http.response import JsonResponse
-from app.models import Task, User
+from app.models import Task, User, Category, Subcategory
 from rest_framework import status
 from django.db.models import Count
 from django.db.models import Count
@@ -26,6 +26,20 @@ class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+@api_view(['GET', 'POST'])
+def getCategories(request):
+    if request.method == 'GET':
+        regions = Category.objects.all()
+        serializer = CategorySerializer(regions, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET', 'POST'])
+def getSubcategories(request):
+    if request.method == 'GET':
+        regions = Subcategory.objects.all()
+        serializer = SubcategorySerializer(regions, many=True)
+        return Response(serializer.data)
 
 @api_view(['GET', 'POST', 'PUT'])
 def getRoutes(request):
