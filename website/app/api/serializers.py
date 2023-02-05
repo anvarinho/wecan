@@ -2,10 +2,16 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from app.models import Task, Category, Subcategory, User
 
+class CategorySerializer(ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['name']
+
 class SubcategorySerializer(ModelSerializer):
+    category = CategorySerializer(many=False, read_only=True)
     class Meta:
         model = Subcategory
-        fields = ['name']
+        fields = ['name', 'category']
 
 class UserSerializer(ModelSerializer):
     class Meta:
