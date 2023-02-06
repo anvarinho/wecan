@@ -2,7 +2,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
 from django.shortcuts import render
-from .serializers import TaskSerializer
+from .serializers import TaskSerializer, SubcategorySerializer, CategorySerializer
 from django.http.response import JsonResponse
 from app.models import Task, User, Category, Subcategory
 from rest_framework import status
