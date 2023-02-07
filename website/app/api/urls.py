@@ -13,6 +13,7 @@ urlpatterns = [
     path('categories/', views.getCategories),
     path('subcategories/', views.getSubcategories),
     path('tasks/', views.getTasks),
+    path('register/', views.registerView.as_view()),
 ]
 
 # urlpatterns = [
