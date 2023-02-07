@@ -18,7 +18,7 @@
                 {% if request.user.avatar.url != '/avatar.png' %}
                 <img src="{{request.user.avatar.url}}" style="width:35px;height:35px; border-radius:50%;"/>
                 {% else %}
-                <img src="{% static 'static/avatars/avatar.png' %}" style="width:35px;height:35px; border-radius:50%;"/>
+                <img src="{% static 'avatars/avatar.png' %}" style="width:35px;height:35px; border-radius:50%;"/>
                 {% endif %}
             </a>
         </div>
