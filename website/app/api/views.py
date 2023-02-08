@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
+from rest_framework.authtoken.models import Token
 from django.shortcuts import render
 from .serializers import TaskSerializer, SubcategorySerializer, CategorySerializer
 from django.http.response import JsonResponse
@@ -56,12 +57,18 @@ def getTasks(request):
         regions = Task.objects.order_by('-created')
         serializer = TaskSerializer(regions, many=True)
         return Response(serializer.data)
-    # if request.method == 'POST':
-    #     form = RegionForm(data=request.data)
-    #     if form.is_valid():
-    #         form.save()
-    #         return JsonResponse(form.data, status=status.HTTP_201_CREATED) 
-    #     return JsonResponse(form.errors, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == 'POST' and request.headers['Authorization'] is not None:
+        Task.objects.create(
+            client=Token.objects.get(key=request.headers['Authorization'].replace("Token ", '')).user,
+            category=Category.objects.get(name=request.data['category']),
+            subcategory=Subcategory.objects.get(name=request.data['subcategory']),
+            address=request.data['address'],
+            price=request.data['price'],
+            time=request.data['time'],
+            description=request.data['description'],
+        )
+        return JsonResponse({'object': 'Task created'}, status=status.HTTP_201_CREATED) 
+    return JsonResponse(form.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def getTask(request, pk):

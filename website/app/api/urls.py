@@ -1,6 +1,7 @@
 from django.urls import path, include
 from . import views 
 from rest_framework import routers
+from rest_framework.authtoken.views import obtain_auth_token
 
 router = routers.DefaultRouter()
 router.register(r'account', views.UserViewSet)
@@ -14,6 +15,7 @@ urlpatterns = [
     path('subcategories/', views.getSubcategories),
     path('tasks/', views.getTasks),
     path('register/', views.registerView.as_view()),
+    path('login/', obtain_auth_token)
 ]
 
 # urlpatterns = [
