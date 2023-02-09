@@ -14,6 +14,7 @@ urlpatterns = [
     path('categories/', views.getCategories),
     path('subcategories/', views.getSubcategories),
     path('tasks/', views.getTasks),
+    path('users/', views.getUsers),
     path('register/', views.registerView.as_view()),
     path('login/', obtain_auth_token)
 ]
