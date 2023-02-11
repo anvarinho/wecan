@@ -137,6 +137,6 @@ def getProfile(request):
 @api_view(['GET'])
 def getProfileOfUser(request, pk):
     user = User.objects.get(id=pk)
-    tasks = Task.objects.filter(master=user)
+    tasks = Task.objects.filter(executor=user)
     serializer = TaskSerializer(tasks, many=True)
     return Response(serializer.data)
