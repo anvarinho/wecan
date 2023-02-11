@@ -124,3 +124,19 @@ class loginView(GenericAPIView):
             return Response(data, status=status.HTTP_200_OK)
             # SEND RES
         return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+@api_view(['GET'])
+@authentication_classes([authentication.TokenAuthentication])
+@permission_classes([permissions.IsAuthenticated])
+def getProfile(request):
+    tasks = Task.objects.filter(client=request.auth.user)
+    serializer = TaskSerializer(tasks, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getProfileOfUser(request, pk):
+    user = User.objects.get(id=pk)
+    tasks = Task.objects.filter(client=user)
+    serializer = TaskSerializer(tasks, many=True)
+    return Response(serializer.data)
