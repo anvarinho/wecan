@@ -16,7 +16,7 @@ from .serializers import UserSerializer, LoginSerializer, CreateUserSerializer
 import jwt
 # Create your views here.
 from rest_framework import viewsets
-from rest_framework import permissions
+from rest_framework import authentication, permissions
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
