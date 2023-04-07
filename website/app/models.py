@@ -69,6 +69,9 @@ class Task(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     @property
+    def offers(self):
+        self.offer_set.all()
+    @property
     def timesince(self):
         return timesince.timesince(self.created).split(',')[0]
     def __str__(self):
