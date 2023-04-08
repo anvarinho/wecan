@@ -16,7 +16,7 @@ class SubcategorySerializer(ModelSerializer):
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['id','username', 'first_name', 'last_name', 'avatar', 'registered', 'bio', 'name']
+        fields = ['id','username', 'first_name', 'last_name', 'avatar', 'registered', 'bio', 'name', 'is_master']
 
 class TaskSerializer(ModelSerializer):
     client = UserSerializer(many=False, read_only=True)
