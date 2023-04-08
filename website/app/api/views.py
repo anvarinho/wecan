@@ -135,6 +135,14 @@ def getProfile(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
+@authentication_classes([authentication.TokenAuthentication])
+@permission_classes([permissions.IsAuthenticated])
+def getMyProfile(request):
+    user = User.objects.get(id=request.auth.user.id)
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
 def getProfileOfUser(request, pk):
     user = User.objects.get(id=pk)
     tasks = Task.objects.filter(executor=user)
