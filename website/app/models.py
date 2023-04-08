@@ -21,6 +21,7 @@ class User(AbstractUser):
     username = models.CharField(verbose_name="номер телефона", unique=True, max_length=17, null=True)
     bio = models.TextField(default='')
     avatar = models.ImageField(null=True, default='avatar.png', upload_to="static/avatars")
+    is_master = models.BooleanField(default=False)
     crafts = models.ManyToManyField(Subcategory, blank=True, related_name='crafts', default=None)
     updated = models.DateTimeField(auto_now=True, null=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
