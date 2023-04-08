@@ -18,6 +18,7 @@ urlpatterns = [
     path('profile/', views.getProfile),
     path('my-profile/', views.getMyProfile),
     path('profile/<str:pk>/', views.getProfileOfUser),
+    path('user-tasks/<str:pk>/', views.getTasksOfUser),
     path('register/', views.registerView.as_view()),
     path('login/', obtain_auth_token)
 ]
