@@ -22,7 +22,7 @@ class User(AbstractUser):
     bio = models.TextField(default='')
     avatar = models.ImageField(null=True, default='avatar.png', upload_to="static/avatars")
     is_master = models.BooleanField(default=False)
-    crafts = models.ManyToManyField(Subcategory, blank=True, related_name='crafts', default=None)
+    crafts = models.ManyToManyField(Category, blank=True, related_name='crafts', default=None)
     updated = models.DateTimeField(auto_now=True, null=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
     USERNAME_FIELD = 'username'

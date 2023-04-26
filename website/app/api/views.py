@@ -152,6 +152,6 @@ def getProfileOfUser(request, pk):
 @api_view(['GET'])
 def getTasksOfUser(request, pk):
     user = User.objects.get(id=pk)
-    tasks = Task.objects.filter(client=user)
+    tasks = Task.objects.filter(client=user).order_by('-created')
     serializer = TaskSerializer(tasks, many=True)
     return Response(serializer.data)
